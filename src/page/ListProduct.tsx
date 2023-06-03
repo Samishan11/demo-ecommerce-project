@@ -8,7 +8,7 @@ import {
     CardFooter,
 } from "@material-tailwind/react";
 
-export function ListProduct<React.FC>() {
+export const ListProduct: React.FC = () => {
     return (
         <Card className="w-96">
             <CardHeader shadow={false} floated={false} className="h-96">
