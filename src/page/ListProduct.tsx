@@ -7,40 +7,34 @@ import {
     CardFooter,
 } from "@material-tailwind/react";
 import { useGetProductsQuery } from "../redux/api/apiSlice";
-import { skipToken } from '@reduxjs/toolkit/query/react'
 
 export const ListProduct: React.FC = () => {
-    let id;
-    // rtkquery
-    const { data } = useGetProductsQuery(id ?? skipToken)
-    console.log(data)
+    const { data } = useGetProductsQuery()
     return (
         <div className="flex justify-center mt-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
                 {
-                    Array.from({ length: 6 }).map((data, ind) => {
+                    data?.map((product) => {
                         return (
-                            <Card className="w-80">
+                            <Card key={product.id} className="w-80">
                                 <img
-                                    src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
+                                    src={product.image}
                                     className="w-full h-72 rounded-t-xl object-cover"
                                 />
                                 <CardBody>
                                     <div className="flex items-center justify-between mb-2">
                                         <Typography color="blue-gray" className="font-medium">
-                                            Apple AirPods
+                                            {product.title}
                                         </Typography>
                                         <Typography color="blue-gray" className="font-medium">
-                                            $95.00
+                                            {product.price}
                                         </Typography>
                                     </div>
-                                    <Typography
-                                        variant="small"
-                                        color="gray"
-                                        className="font-normal opacity-75"
+                                    <span
+                                        className="font-normal overflow-hidden overflow-ellipsis line-clamp-3 truncatetext-sm opacity-75"
                                     >
-                                        With plenty of talk and listen time, voice-activated Siri access, and an available wireless charging case.
-                                    </Typography>
+                                        {product.description}
+                                    </span>
                                 </CardBody>
                                 <CardFooter className="pt-0">
                                     <Button
