@@ -1,36 +1,41 @@
 import React from "react";
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 import { ProductCart } from "./component/ProductCart";
-import Cart from "../cart/Cart";
-import { useSelector } from "react-redux";
-const cartItems = [
-    {
-        id: 1, title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops', price: 109.95, quantity: 2, image
-            :
-            "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-    },
-    {
-        id: 2, title: 'Mens Casual Premium Slim Fit T-Shirts ', price: 22.3, quantity: 2, image
-            :
-            "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
-    },
+import { Cart } from "../cart/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
-]
 export const ListProduct: React.FC = () => {
-    // cart state
-    const { isShow: cartIsShow } = useSelector((state: any) => state.cart);
-
+    // rkt
+    const dispatch = useDispatch();
+    const { cart } = useSelector((state: any) => state.cart);
     // rtk query 
-    const { data } = useGetProductsQuery()
+    const { data } = useGetProductsQuery();
+
+    // methods
+    const handleAddToCart = (product: any) => {
+        const cartItem = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            quantity: 1,
+            image: product.image,
+        }
+        dispatch(addToCart(cartItem));
+    };
+
     return (
         <div className="flex justify-center mt-10">
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 xl:grid-cold-5 ">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cold-5 ">
                 {
-                    data?.map((product) => <ProductCart key={product.id} {...product} />)
+                    data?.map((product) => <ProductCart onClick={() => {
+                        handleAddToCart(product)
+                    }} key={product.id} product={product} />)
                 }
-                <Cart cartItems={cartItems} />
 
             </div>
+            <Cart cartItems={cart} />
         </div>
     );
-}
+};
+

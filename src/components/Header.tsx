@@ -4,7 +4,16 @@ import {
     Button,
     Input,
 } from "@material-tailwind/react";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleCart } from '../redux/slice/cartSlice';
 export const Header: React.FC = () => {
+    const dispatch = useDispatch();
+    const { isShow: cartIsShow } = useSelector((state: any) => state.cart);
+
+    const handelToggle = () => {
+        dispatch(toggleCart(!cartIsShow))
+    }
+
     return (
         <div
             className=" w-full bg-gray-100 text-black py-3"
@@ -19,7 +28,7 @@ export const Header: React.FC = () => {
                     Demo-Ecommerce
                 </Typography>
 
-                <div className="relative flex w-full gap-2 md:w-96">
+                <div className="relative hidden gap-2 md:block md:w-96">
                     <Input
                         type="search"
                         color="black"
@@ -47,6 +56,7 @@ export const Header: React.FC = () => {
                         My Order
                     </Typography>
                     <i
+                        onClick={handelToggle}
                         className=" rounded-full border-gray-900 h-10 w-10 flex justify-center items-center fa-solid fa-bag-shopping bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
                     >
 

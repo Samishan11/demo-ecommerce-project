@@ -1,7 +1,7 @@
 import { Card, CardBody, CardFooter, Typography } from '@material-tailwind/react'
 import React from 'react'
 
-interface product {
+interface Product {
     id: number;
     title: string;
     price: number;
@@ -14,9 +14,14 @@ interface product {
     };
 }
 
-export const ProductCart: React.FC<product> = ({ id, image, title, description, price, }) => {
+interface ProductCardProps {
+    product: Product;
+    onClick: () => void;
+}
+export const ProductCart: React.FC<ProductCardProps> = ({ product, onClick }) => {
+    const { id, image, title, description, price } = product;
     return (
-        <Card key={id} className="w-72 mb-5 relative">
+        <Card key={id} className="w-72 mb-5 relative mx-auto">
             <img
                 src={image}
                 className="w-full h-52 rounded-t-xl object-contain"
@@ -40,6 +45,7 @@ export const ProductCart: React.FC<product> = ({ id, image, title, description, 
                         ${price}
                     </Typography>
                     <i
+                        onClick={onClick}
                         className=" rounded-full border-gray-900 h-10 w-10 flex justify-center items-center fa-solid fa-bag-shopping bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
                     >
 
