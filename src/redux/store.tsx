@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { apiSlice } from './api/apiSlice'
-import toggelReducer from "./slice/toggelSlice"
+import cartReducer from "./slice/cartSlice"
 export const store = configureStore({
     reducer: {
         [apiSlice.reducerPath]: apiSlice.reducer,
-        toggelCart: toggelReducer
+        cart: cartReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiSlice.middleware),

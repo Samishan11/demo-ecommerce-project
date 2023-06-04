@@ -1,8 +1,8 @@
 import React from "react";
-
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 import { ProductCart } from "./component/ProductCart";
 import Cart from "../cart/Cart";
+import { useSelector } from "react-redux";
 const cartItems = [
     {
         id: 1, title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops', price: 109.95, quantity: 2, image
@@ -17,9 +17,11 @@ const cartItems = [
 
 ]
 export const ListProduct: React.FC = () => {
+    // cart state
+    const { isShow: cartIsShow } = useSelector((state: any) => state.cart);
+
     // rtk query 
     const { data } = useGetProductsQuery()
-    console.log(data)
     return (
         <div className="flex justify-center mt-10">
             <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 xl:grid-cold-5 ">

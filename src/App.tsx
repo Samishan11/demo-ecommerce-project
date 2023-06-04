@@ -1,13 +1,7 @@
-import React from 'react'
-import { ListProduct } from './page/productlist/ListProduct'
-import { Header } from './components/Header'
-
+import { Routing } from './route/Routin'
 function App() {
   return (
-    <React.Fragment>
-      <Header />
-      <ListProduct />
-    </React.Fragment>
+    <Routing />
   )
 }
 
