@@ -1,17 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 import { ProductCart } from "./component/ProductCart";
-import { Cart } from "../cart/Cart";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slice/cartSlice";
+import { LoadingSkeleton } from "../../components/LoadingSkeleton";
+import { Box } from "@mui/material";
+
+const width: number = 300
+const height: number = 200
+const number: number = 8
 
 export const ListProduct: React.FC = () => {
+    const navigate = useNavigate();
     // rkt
     const dispatch = useDispatch();
-    const { cart } = useSelector((state: any) => state.cart);
-    // rtk query 
-    const { data } = useGetProductsQuery();
-
+    const { data, isLoading } = useGetProductsQuery();
     // methods
     const handleAddToCart = (product: any) => {
         const cartItem = {
@@ -26,15 +30,19 @@ export const ListProduct: React.FC = () => {
 
     return (
         <div className="flex justify-center mt-10">
-            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cold-5 ">
+            <Box>
                 {
-                    data?.map((product) => <ProductCart onClick={() => {
+                    isLoading && <LoadingSkeleton height={height} width={width} number={number} />
+                }
+            </Box>
+            <Box className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cold-5 ">
+                {
+                    !isLoading &&
+                    data?.map((product) => <ProductCart navigate={() => navigate(`/detail/${product.id}`)} onClick={() => {
                         handleAddToCart(product)
                     }} key={product.id} product={product} />)
                 }
-
-            </div>
-            <Cart cartItems={cart} />
+            </Box>
         </div>
     );
 };

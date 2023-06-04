@@ -17,8 +17,9 @@ interface Product {
 interface ProductCardProps {
     product: Product;
     onClick: () => void;
+    navigate: () => void;
 }
-export const ProductCart: React.FC<ProductCardProps> = ({ product, onClick }) => {
+export const ProductCart: React.FC<ProductCardProps> = ({ product, navigate }) => {
     const { id, image, title, description, price } = product;
     return (
         <Card key={id} className="w-72 mb-5 relative mx-auto">
@@ -45,8 +46,8 @@ export const ProductCart: React.FC<ProductCardProps> = ({ product, onClick }) =>
                         ${price}
                     </Typography>
                     <i
-                        onClick={onClick}
-                        className=" rounded-full border-gray-900 h-10 w-10 flex justify-center items-center fa-solid fa-bag-shopping bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
+                        onClick={navigate}
+                        className=" rounded-full border-gray-900 h-10 w-10 flex justify-center items-center fa-solid fa-arrow-right bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
                     >
 
                     </i>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import {
     Typography,
     Button,
@@ -19,14 +20,15 @@ export const Header: React.FC = () => {
             className=" w-full bg-gray-100 text-black py-3"
         >
             <div className="flex flex-wrap items-center justify-between gap-y-4 text-gray-800">
-                <Typography
-                    as="a"
-                    href="#"
-                    variant="h5"
-                    className="mr-4 ml-2 cursor-pointer py-1.5"
-                >
-                    Demo-Ecommerce
-                </Typography>
+                <Link to="/">
+                    <Typography
+                        as="a"
+                        href="#"
+                        variant="h5"
+                        className="mr-4 ml-2 cursor-pointer py-1.5"
+                    >
+                        Demo-Ecommerce
+                    </Typography></Link>
 
                 <div className="relative hidden gap-2 md:block md:w-96">
                     <Input

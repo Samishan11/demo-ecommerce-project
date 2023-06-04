@@ -25,7 +25,13 @@ export const apiSlice = createApi({
             }),
             providesTags: ['Product'],
         }),
+        getSingleProduct: builder.query<Product, string>({
+            query: (id: string) => ({
+                url: `/${id}`,
+            }),
+            providesTags: ['Product'],
+        }),
     }),
 });
 
-export const { useGetProductsQuery } = apiSlice;
+export const { useGetProductsQuery, useGetSingleProductQuery } = apiSlice;
