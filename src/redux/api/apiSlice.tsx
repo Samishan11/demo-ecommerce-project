@@ -21,9 +21,9 @@ export const apiSlice = createApi({
     endpoints: (builder) => ({
         getProducts: builder.query<Product[], void>({
             query: () => ({
-                url: '?limit=5',
-                providesTags: ['Product'],
+                url: '?limit=8',
             }),
+            providesTags: ['Product'],
         }),
     }),
 });
