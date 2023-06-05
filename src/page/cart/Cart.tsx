@@ -25,10 +25,10 @@ export const Cart: React.FC = () => {
     return (
         <React.Fragment>
             <Drawer
+                className="w-2/4 p-4"
                 placement="right"
                 open={cartIsShow}
                 onClose={handelToggle}
-                className="p-4"
             >
                 <div className="mb-6 flex items-center justify-between">
                     <Typography variant="h5" color="blue-gray">

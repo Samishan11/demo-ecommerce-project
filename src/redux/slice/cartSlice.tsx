@@ -25,6 +25,10 @@ const saveCartProduct = (cart: CartItem[]) => {
     localStorage.setItem("cartItems", JSON.stringify(cart));
 };
 
+export const getTotalPrice = (cart: any[]) => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
@@ -33,6 +37,7 @@ export const cartSlice = createSlice({
             state.isShow = action.payload;
         },
         addToCart: (state, action: PayloadAction<CartItem>) => {
+            console.log(action.payload)
             state.cart.push(action.payload);
             saveCartProduct(state.cart);
             toast.info("Item Added To Cart", { position: toast.POSITION.BOTTOM_RIGHT })
@@ -48,7 +53,6 @@ export const cartSlice = createSlice({
             toast.info("Cart updated", { position: toast.POSITION.BOTTOM_RIGHT })
         },
         deleteCart: (state, action: PayloadAction<any>) => {
-            console.log(action.payload)
             const { pid } = action.payload
             const { cart } = state;
             state.cart = cart.filter(item =>
@@ -57,8 +61,12 @@ export const cartSlice = createSlice({
             saveCartProduct(state.cart);
             toast.info("Item remove from cart", { position: toast.POSITION.BOTTOM_RIGHT })
         },
+        deleteAllCartItem: (state) => {
+            state.cart = []
+            saveCartProduct(state.cart);
+        },
     },
 });
 
-export const { toggleCart, addToCart, updateCart, deleteCart } = cartSlice.actions;
+export const { toggleCart, addToCart, updateCart, deleteCart, deleteAllCartItem } = cartSlice.actions;
 export default cartSlice.reducer;
