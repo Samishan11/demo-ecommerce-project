@@ -7,19 +7,20 @@ import {
 } from "@material-tailwind/react";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleCart } from '../redux/slice/cartSlice';
+import { Box } from '@mui/material';
 export const Header: React.FC = () => {
     const dispatch = useDispatch();
-    const { isShow: cartIsShow } = useSelector((state: any) => state.cart);
+    const { isShow: cartIsShow, cart } = useSelector((state: any) => state.cart);
 
     const handelToggle = () => {
         dispatch(toggleCart(!cartIsShow))
     }
-
+    console.log(localStorage.getItem("cartItems"))
     return (
-        <div
+        <Box
             className=" w-full bg-gray-100 text-black py-3"
         >
-            <div className="flex flex-wrap items-center justify-between gap-y-4 text-gray-800">
+            <Box className="flex flex-wrap items-center justify-between gap-y-4 text-gray-800">
                 <Link to="/">
                     <Typography
                         as="a"
@@ -30,7 +31,7 @@ export const Header: React.FC = () => {
                         Demo-Ecommerce
                     </Typography></Link>
 
-                <div className="relative hidden gap-2 md:block md:w-96">
+                <Box className="relative hidden gap-2 md:block md:w-96">
                     <Input
                         type="search"
                         color="black"
@@ -47,8 +48,8 @@ export const Header: React.FC = () => {
                     >
                         Search
                     </Button>
-                </div>
-                <div className="relative flex px-5 ">
+                </Box>
+                <Box className="relative flex px-5 ">
                     <Typography
                         as="a"
                         href="#"
@@ -57,14 +58,19 @@ export const Header: React.FC = () => {
                     >
                         My Order
                     </Typography>
-                    <i
-                        onClick={handelToggle}
-                        className=" rounded-full border-gray-900 h-10 w-10 flex justify-center items-center fa-solid fa-bag-shopping bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
-                    >
+                    <Box className="relative">
+                        <i
+                            onClick={handelToggle}
+                            className=" rounded-full  border-gray-900 h-10 w-10 flex justify-center items-center fa-solid fa-bag-shopping bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:shadow-none hover:scale-105 focus:shadow-none focus:scale-105 active:scale-100"
+                        >
 
-                    </i>
-                </div>
-            </div>
-        </div>
+                        </i>
+                        <span className="absolute font-serif top-0 right-2 text-sm">
+                            {cart?.length}
+                        </span>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
     )
 }

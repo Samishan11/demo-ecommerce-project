@@ -12,22 +12,10 @@ const height: number = 200
 const number: number = 8
 
 export const ListProduct: React.FC = () => {
+    // hooks
     const navigate = useNavigate();
-    // rkt
-    const dispatch = useDispatch();
+    // rkt query
     const { data, isLoading } = useGetProductsQuery();
-    // methods
-    const handleAddToCart = (product: any) => {
-        const cartItem = {
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            quantity: 1,
-            image: product.image,
-        }
-        dispatch(addToCart(cartItem));
-    };
-
     return (
         <div className="flex justify-center mt-10">
             <Box>
@@ -38,9 +26,7 @@ export const ListProduct: React.FC = () => {
             <Box className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cold-5 ">
                 {
                     !isLoading &&
-                    data?.map((product) => <ProductCart navigate={() => navigate(`/detail/${product.id}`)} onClick={() => {
-                        handleAddToCart(product)
-                    }} key={product.id} product={product} />)
+                    data?.map((product) => <ProductCart navigate={() => navigate(`/detail/${product.id}`)} key={product.id} product={product} />)
                 }
             </Box>
         </div>

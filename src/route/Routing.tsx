@@ -3,16 +3,15 @@ import { Header } from "../components/Header"
 import { ListProduct } from "../page/productlist/ListProduct"
 import { ProductDetail } from "../page/productdetail/ProductDetail"
 import { Cart } from "../page/cart/Cart"
-import { useSelector } from "react-redux"
 export const Routing = () => {
-  const { cart } = useSelector((state: any) => state.cart);
+
   return (
     <Router>
       <Header />
-      <Cart cartItems={cart} />
+      <Cart />
       <Routes>
         <Route path="/" element={<ListProduct />} />
-        <Route path="/detail/:id" element={<ProductDetail />} />
+        <Route path="/detail/:productId" element={<ProductDetail />} />
       </Routes>
     </Router>
   )

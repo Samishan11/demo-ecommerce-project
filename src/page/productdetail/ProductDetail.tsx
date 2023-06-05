@@ -2,12 +2,28 @@ import React from "react";
 import { useParams } from "react-router-dom"
 import { Typography } from "@material-tailwind/react";
 import { useGetSingleProductQuery } from "../../redux/api/apiSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
 
 export const ProductDetail: React.FC = () => {
-    const { id } = useParams();
+    const { productId } = useParams();
+    // rtk hooks 
+    const dispatch = useDispatch();
     // rtk query
-    const { data: product } = useGetSingleProductQuery(String(id));
+    const { data: product } = useGetSingleProductQuery(String(productId));
+
+    // methods
+    const handleAddToCart = (product: any) => {
+        const cartItem = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            quantity: 1,
+            image: product.image,
+        }
+        dispatch(addToCart(cartItem));
+    };
     return (
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             <div className=" w-full sm:w-2/4 ">
@@ -69,6 +85,7 @@ export const ProductDetail: React.FC = () => {
                     <Typography className="md:w-96 text-base leading-normal text-gray-600 mt-4">Composition: 100% calf leather, inside: 100% lamb leather</Typography>
                 </div>
                 <button
+                    onClick={() => handleAddToCart(product)}
                     className="
 						text-base
 						flex
@@ -82,8 +99,7 @@ export const ProductDetail: React.FC = () => {
 						hover:bg-gray-800
 					"
                 >
-
-                    Check availability in store
+                    Add To Cart
                 </button>
 
             </div>

@@ -16,7 +16,6 @@ interface Product {
 
 interface ProductCardProps {
     product: Product;
-    onClick: () => void;
     navigate: () => void;
 }
 export const ProductCart: React.FC<ProductCardProps> = ({ product, navigate }) => {
