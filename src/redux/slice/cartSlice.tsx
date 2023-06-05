@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import { toast } from 'react-toastify';
 export interface CartItem {
     id: number;
     title: string;
@@ -13,9 +13,12 @@ export interface CartState {
     cart: CartItem[];
 }
 
+const cartData = localStorage.getItem("cartItems")
+const items = cartData !== null && JSON.parse(cartData)
+
 const initialState: CartState = {
     isShow: false,
-    cart: [],
+    cart: items ? items : []
 };
 
 const saveCartProduct = (cart: CartItem[]) => {
@@ -32,18 +35,21 @@ export const cartSlice = createSlice({
         addToCart: (state, action: PayloadAction<CartItem>) => {
             state.cart.push(action.payload);
             saveCartProduct(state.cart);
+            toast.success("Item Add To Cart")
         },
         updateCart: (state, action: PayloadAction<CartItem>) => {
+            const { id } = action.payload;
             const { cart } = state;
             state.cart = cart.map(item =>
-                item.id === action.payload.id ? action.payload : item
+                item.id === id ? action.payload : item
             );
             saveCartProduct(state.cart);
         },
-        deleteCart: (state, action: PayloadAction<CartItem>) => {
+        deleteCart: (state, action: PayloadAction<any>) => {
+            const { id } = action.payload
             const { cart } = state;
             state.cart = cart.filter(item =>
-                item.id !== action.payload.id
+                item.id !== id
             );
             saveCartProduct(state.cart);
         },

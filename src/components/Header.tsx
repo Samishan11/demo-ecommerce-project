@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
     const handelToggle = () => {
         dispatch(toggleCart(!cartIsShow))
     }
-    console.log(localStorage.getItem("cartItems"))
+
     return (
         <Box
             className=" w-full bg-gray-100 text-black py-3"

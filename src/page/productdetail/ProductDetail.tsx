@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useParams } from "react-router-dom"
 import { Typography } from "@material-tailwind/react";
 import { useGetSingleProductQuery } from "../../redux/api/apiSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/slice/cartSlice";
 
 
@@ -10,6 +10,7 @@ export const ProductDetail: React.FC = () => {
     const { productId } = useParams();
     // rtk hooks 
     const dispatch = useDispatch();
+    const { cart } = useSelector((state: any) => state.cart)
     // rtk query
     const { data: product } = useGetSingleProductQuery(String(productId));
 
@@ -24,6 +25,9 @@ export const ProductDetail: React.FC = () => {
         }
         dispatch(addToCart(cartItem));
     };
+
+    // const hash = useMemo(() => cart.filter((data: string) => String(data.id)), []);
+
     return (
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             <div className=" w-full sm:w-2/4 ">

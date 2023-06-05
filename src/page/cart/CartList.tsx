@@ -1,5 +1,7 @@
 import { Typography } from '@material-tailwind/react'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { deleteCart } from '../../redux/slice/cartSlice';
 interface CartItem {
     id: number;
     title: string;
@@ -13,8 +15,13 @@ interface CartPageProps {
 }
 
 export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
+    // rtk hooks
+    const dispatch = useDispatch()
+
+    // states
     const [quantity, setQuantity] = useState<number>(1)
 
+    // methods 
     const handleQuantityChange = (id: number, quantity: number) => {
         setQuantity(quantity + 1)
     }
@@ -61,6 +68,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
 
                                     <div className="flex">
                                         <button
+                                            onClick={() => dispatch(deleteCart({ id: product.id }))}
                                             type="button"
                                             className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
