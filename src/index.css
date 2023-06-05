@@ -6,3 +6,20 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+* {
+    scrollbar-width: thin;
+    scrollbar-width: 3px;
+}
+
+*::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 14px;
+}
