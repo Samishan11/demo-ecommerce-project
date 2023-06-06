@@ -25,7 +25,7 @@ export const Cart: React.FC = () => {
     return (
         <React.Fragment>
             <Drawer
-                className="w-2/4 p-4"
+                className="w-2/4 p-4 custom-drawer"
                 placement="right"
                 open={cartIsShow}
                 onClose={handelToggle}

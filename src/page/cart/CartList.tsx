@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 interface CartItem {
-    id: number;
+    pid: number;
     title: string;
     price: number;
     quantity: number;

@@ -32,7 +32,7 @@ export const CheckoutForm: React.FC = () => {
     const submitForm = (data: any) => {
         const formData = { ...data }
         const payload = {
-            ...cart,
+            cart,
             ...formData,
             totalPrice,
             orderAt: new Date().toDateString()

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 export interface Order {
-    items: {
+    cart: {
         pid: number;
         title: string;
         price: number;
@@ -42,6 +42,7 @@ export const orderSlice = createSlice({
     initialState,
     reducers: {
         addOrder: (state, action: PayloadAction<Order>) => {
+            console.log(action.payload)
             state.order.push(action.payload);
             saveOrder(state.order)
         },

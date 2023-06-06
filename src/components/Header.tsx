@@ -50,14 +50,12 @@ export const Header: React.FC = () => {
                     </Button>
                 </Box>
                 <Box className="relative flex px-5 ">
-                    <Typography
-                        as="a"
-                        href="#"
-                        variant="h6"
+                    <Link
+                        to="/customer/order"
                         className="mr-4 ml-2 cursor-pointer py-1.5"
                     >
                         My Order
-                    </Typography>
+                    </Link>
                     <Box className="relative">
                         <i
                             onClick={handelToggle}

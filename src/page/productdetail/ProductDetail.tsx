@@ -35,7 +35,7 @@ export const ProductDetail: React.FC = () => {
     return (
         <Box className="flex flex-col sm:flex-row items-center sm:items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             {!isLoading ? <Box className=" w-full sm:w-2/4 ">
-                <img className=" w-[80%]" alt="img of a girl posing" src={product?.image} />
+                <img className=" w-[80%] object-contain" alt={product?.title} src={product?.image} />
             </Box>
                 : <LoadingSkeleton className="w-[90%] mx-auto" height={"500px"} number={1} />
             }
@@ -57,11 +57,11 @@ export const ProductDetail: React.FC = () => {
 
                         <Box>
                             <Typography className=" text-base lg:leading-tight leading-normal text-gray-600 mt-7">{product?.description}</Typography>
-                            {/* <Typography className="text-base leading-4 mt-7 text-gray-600">Product Code: 8BN321AF2IF0NYA</Typography>
+                            <Typography className="text-base leading-4 mt-7 text-gray-600">Product Code: 8BN321AF2IF0NYA</Typography>
                             <Typography className="text-base leading-4 mt-4 text-gray-600">Length: 13.2 inches</Typography>
                             <Typography className="text-base leading-4 mt-4 text-gray-600">Height: 10 inches</Typography>
                             <Typography className="text-base leading-4 mt-4 text-gray-600">Depth: 5.1 inches</Typography>
-                            <Typography className="md:w-96 text-base leading-normal text-gray-600 mt-4">Composition: 100% calf leather, inside: 100% lamb leather</Typography> */}
+                            <Typography className="md:w-96 text-base leading-normal text-gray-600 mt-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero, eaque sequi aperiam magni sunt assumenda?</Typography>
                         </Box>
 
                         <Box className="mt-5" display={"flex"} alignItems={"center"} flexDirection={{ xs: "column", sm: "row" }}>

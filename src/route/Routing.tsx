@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { ListProduct } from "../page/productlist/ListProduct";
 import { ProductDetail } from "../page/productdetail/ProductDetail";
@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
 import { Checkout } from "../page/checkout/Checkout";
+import { OrderViewPage } from "../page/order/OrderViewPage";
 
 interface ProtectedProps {
   children: ReactNode;
@@ -19,8 +20,7 @@ const Protected: React.FC<ProtectedProps> = ({ children }) => {
 };
 
 export const Routing: React.FC = () => {
-  const { order } = useSelector((state: any) => state.order);
-  console.log(order)
+
   return (
     <Router>
       <Header />
@@ -28,14 +28,9 @@ export const Routing: React.FC = () => {
       <Routes>
         <Route path="/" element={<ListProduct />} />
         <Route path="/detail/:productId" element={<ProductDetail />} />
+        <Route path="/customer/order" element={<OrderViewPage />} />
         <Route
-          path="/checkout"
-          element={
-            <Protected>
-              <Checkout />
-            </Protected>
-          }
-        />
+          path="/checkout" element={<Protected> <Checkout /></Protected>} />
       </Routes>
       <ToastContainer />
     </Router>
