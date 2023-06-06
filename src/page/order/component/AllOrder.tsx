@@ -15,7 +15,7 @@ export const AllOrder: React.FC = () => {
             username: data.username,
             email: data.email,
             orderAt: data.orderAt,
-            id: item.id,
+            id: data.id,
             pid: item.pid,
             name: item.title,
             price: item.price,
