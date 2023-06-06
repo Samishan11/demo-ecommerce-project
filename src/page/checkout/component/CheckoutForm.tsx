@@ -5,7 +5,7 @@ import { deleteAllCartItem, getTotalPrice } from '../../../redux/slice/cartSlice
 import { ConfirmModal } from '../../../components/ConfirmModal'
 import { useForm } from "react-hook-form";
 import { addOrder } from '../../../redux/slice/orderSlice'
-
+import { useNavigate } from "react-router-dom";
 type Inputs = {
     email: string,
     address: string,
@@ -19,15 +19,16 @@ type Inputs = {
 };
 
 export const CheckoutForm: React.FC = () => {
+    // hooks
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     const { cart } = useSelector((state: any) => state.cart)
     const [show, setShow] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    // methods
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const totalPrice = getTotalPrice(cart)
     const submitForm = (data: any) => {
         const formData = { ...data }
@@ -42,6 +43,7 @@ export const CheckoutForm: React.FC = () => {
             setLoading(false)
             handleClose()
             dispatch(addOrder(payload))
+            navigate(`/customer/order`)
             dispatch(deleteAllCartItem())
         }, 3000)
     }

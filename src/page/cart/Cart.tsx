@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Drawer,
     Typography,
@@ -11,11 +11,10 @@ import { CartList } from './CartList';
 
 
 export const Cart: React.FC = () => {
-    // rtk hooks
+    // hooks
     const dispatch = useDispatch();
     const { isShow: cartIsShow } = useSelector((state: any) => state.cart);
     const { cart } = useSelector((state: any) => state.cart);
-    // states
 
     // methods
     const handelToggle = () => {

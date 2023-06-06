@@ -18,18 +18,13 @@ interface CartPageProps {
 }
 
 export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
+    // hooks
     const navigate = useNavigate()
-    // rtk hooks
     const dispatch = useDispatch()
     const { isShow } = useSelector((state: any) => state.cart)
-
-    // states
     const [quantity, setQuantity] = useState<any>(0)
-    useEffect(() => {
-        const quantities = cartItems.map((item) => item.quantity);
-        setQuantity(quantities);
-    }, [cartItems]);
 
+    // methods 
     const handleQuantityChange = async (data: any, action: string, ind: number) => {
         const updatedQuantities = [...quantity];
         if (action === "increase") {
@@ -63,6 +58,10 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
         dispatch(toggleCart(!isShow))
         navigate(`/checkout`)
     }
+    useEffect(() => {
+        const quantities = cartItems.map((item) => item.quantity);
+        setQuantity(quantities);
+    }, [cartItems]);
     return (
         <Box className="mt-8">
             <Box className="flow-root">
