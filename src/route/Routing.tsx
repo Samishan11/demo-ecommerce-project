@@ -16,11 +16,10 @@ interface ProtectedProps {
 
 const Protected: React.FC<ProtectedProps> = ({ children }) => {
   const { cart } = useSelector((state: any) => state.cart);
-  return cart?.length > 0 ? <>{children}</> : <Navigate to="/" />;
+  return cart?.length > 0 ? <>{children}</> : null;
 };
 
 export const Routing: React.FC = () => {
-
   return (
     <Router>
       <Header />

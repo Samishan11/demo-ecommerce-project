@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 import { useSelector } from 'react-redux';
+import { EmptyOrder } from "./EmptyOrder";
 
 export const AllOrder: React.FC = () => {
     const { order } = useSelector((state: any) => state.order);
@@ -9,12 +10,13 @@ export const AllOrder: React.FC = () => {
     useEffect(() => {
         if (order) {
             const orderdata = order?.flatMap((data: any) => {
-                return data.cart.flatMap((item: any) => {
+                return data?.cart?.flatMap((item: any) => {
                     return {
                         username: data.username,
                         email: data.email,
                         orderAt: data.orderAt,
-                        id: item.pid,
+                        id: item.id,
+                        pid: item.pid,
                         name: item.title,
                         price: item.price,
                         quantity: `x ${item.quantity}`,
@@ -31,9 +33,10 @@ export const AllOrder: React.FC = () => {
 
 
     const columns: GridColDef[] = [
+        { field: 'id', headerName: 'Order ID', width: 150 },
         { field: 'username', headerName: 'Username', width: 150 },
-        { field: 'email', headerName: 'email', width: 200 },
-        { field: 'name', headerName: 'Title', width: 250 },
+        { field: 'email', headerName: 'email', width: 250 },
+        { field: 'name', headerName: 'Title', width: 300 },
         { field: 'price', headerName: 'Price', width: 100 },
         { field: 'quantity', headerName: 'Quantity', width: 100 },
         { field: 'total', headerName: 'Total Price', width: 100 },
@@ -52,7 +55,8 @@ export const AllOrder: React.FC = () => {
     return (
         <div style={{ height: 400, width: '100%' }}>
             {
-                row?.length > 0 && <DataGrid autoHeight columns={columns} rows={row} />
+                row?.length > 0 ? <DataGrid autoHeight columns={columns} rows={row} /> :
+                    <EmptyOrder />
             }
         </div>
     );

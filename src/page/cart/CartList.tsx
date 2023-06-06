@@ -31,7 +31,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
             updatedQuantities[ind] += 1
             const body = {
                 ...data,
-                id: data.pid,
+                id: data.id,
                 quantity: updatedQuantities[ind]
             }
             dispatch(updateCart(body))
@@ -39,7 +39,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
         } else if (action === "decrease" && updatedQuantities[ind]) {
             if (updatedQuantities[ind] <= 1) {
 
-                dispatch(deleteCart({ pid: data?.pid }))
+                dispatch(deleteCart({ id: data?.id }))
             }
             updatedQuantities[ind] -= 1;
             const body = {
@@ -104,7 +104,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
 
                                         <Box className="flex">
                                             <button
-                                                onClick={() => dispatch(deleteCart({ pid: c.pid }))}
+                                                onClick={() => dispatch(deleteCart({ id: c.id }))}
                                                 type="button"
                                                 className="font-medium text-indigo-600 hover:text-indigo-500"
                                             >
@@ -127,18 +127,21 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
                     <Box className="mt-6">
                         <button
                             onClick={handelNavigate}
-                            className="flex w-full  items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
+                            className="flex w-full  items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium focus:outline-none disabled:opacity-25 text-white shadow-sm hover:bg-indigo-700"
+                            disabled={cartItems?.length === 0}>
                             Checkout
                         </button>
+
                     </Box>
                     <Box className="mt-6 flex flex-col justify-center text-center text-sm text-gray-500">
                         <p>
                             or
                         </p>
+
                         <button
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none disabled:opacity-25"
+
                         >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, updateCart } from "../../redux/slice/cartSlice";
 import { Box, Rating } from "@mui/material";
 import { LoadingSkeleton } from "../../components/LoadingSkeleton";
+import { v4 as uuid } from 'uuid';
 
 
 export const ProductDetail: React.FC = () => {
@@ -16,8 +17,10 @@ export const ProductDetail: React.FC = () => {
     // rtk query
     const { data: product, isLoading } = useGetSingleProductQuery(String(productId));
     // methods
+    const unique_id = uuid();
     const handleAddToCart = (product: any) => {
         const cartItem = {
+            id: unique_id.slice(0, 5),
             pid: product.id,
             title: product.title,
             price: product.price,
@@ -28,7 +31,7 @@ export const ProductDetail: React.FC = () => {
     };
     const productInCart = useMemo(() => cart.find((data: any) => String(data.pid) === String(productId)), [cart, productId]);
     const handleUpdateCart = (data: any) => {
-        const cData = { ...productInCart, quantity: data.quantity, pid: data?.pid }
+        const cData = { ...productInCart, ...data }
         dispatch(updateCart(cData));
     };
 
@@ -81,7 +84,7 @@ export const ProductDetail: React.FC = () => {
                                     </button>
                                     :
                                     <button
-                                        onClick={() => handleUpdateCart({ pid: product?.id, quantity: productInCart.quantity + 1 })}
+                                        onClick={() => handleUpdateCart({ id: productInCart?.id, quantity: productInCart.quantity + 1 })}
                                         className="mt-5 text-base flex items-center justify-center leading-none text-white bg-gray-900 w-full py-4 hover:bg-gray-800">
                                         Update Cart
                                     </button>

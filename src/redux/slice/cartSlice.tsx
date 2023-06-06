@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 interface CartItem {
+    id: string;
     pid: number;
-    id?: number;
     title: string;
     price: number;
     quantity: number;
@@ -44,20 +44,20 @@ export const cartSlice = createSlice({
             toast.info("Item Added To Cart", { position: toast.POSITION.BOTTOM_RIGHT })
         },
         updateCart: (state, action: PayloadAction<any>) => {
-            const { pid } = action.payload;
+            const { id } = action.payload;
             console.log(action.payload)
             const { cart } = state;
             state.cart = cart.map(item =>
-                item.pid === pid ? action.payload : item
+                item.id === id ? action.payload : item
             );
             saveCartProduct(state.cart);
             toast.info("Cart updated", { position: toast.POSITION.BOTTOM_RIGHT })
         },
         deleteCart: (state, action: PayloadAction<any>) => {
-            const { pid } = action.payload
+            const { id } = action.payload
             const { cart } = state;
             state.cart = cart.filter(item =>
-                item.pid !== pid
+                item.id !== id
             );
             saveCartProduct(state.cart);
             toast.info("Item remove from cart", { position: toast.POSITION.BOTTOM_RIGHT })

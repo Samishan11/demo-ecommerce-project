@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 export interface Order {
+    id: string;
     cart: {
         pid: number;
         title: string;

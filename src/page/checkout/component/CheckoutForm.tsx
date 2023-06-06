@@ -6,6 +6,7 @@ import { ConfirmModal } from '../../../components/ConfirmModal'
 import { useForm } from "react-hook-form";
 import { addOrder } from '../../../redux/slice/orderSlice'
 import { useNavigate } from "react-router-dom";
+import { v4 as uuid } from 'uuid';
 type Inputs = {
     email: string,
     address: string,
@@ -30,20 +31,22 @@ export const CheckoutForm: React.FC = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const totalPrice = getTotalPrice(cart)
+    const unique_id = uuid();
     const submitForm = (data: any) => {
         const formData = { ...data }
         const payload = {
-            cart,
             ...formData,
+            id: unique_id.slice(0, 5),
+            cart,
             totalPrice,
             orderAt: new Date().toDateString()
         }
         setLoading(true)
         setTimeout(() => {
+            navigate(`/customer/order`)
             setLoading(false)
             handleClose()
             dispatch(addOrder(payload))
-            navigate(`/customer/order`)
             dispatch(deleteAllCartItem())
         }, 3000)
     }
