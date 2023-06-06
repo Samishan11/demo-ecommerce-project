@@ -77,7 +77,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
   return (
     <Box className="mt-8">
       <Box className="flow-root">
-        <ul className="overflow-y-scroll max-h-[65vh]">
+        <ul className="overflow-y-scroll max-h-72">
           {cartItems?.length > 0 ? (
             cartItems.map((c, ind: number) => (
               <li key={ind} className="flex py-6">
