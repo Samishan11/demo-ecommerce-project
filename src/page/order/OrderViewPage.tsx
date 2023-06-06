@@ -11,7 +11,7 @@ import { AllOrder } from "./component/AllOrder";
 import { EmptyOrder } from "./component/EmptyOrder";
 
 export const OrderViewPage = () => {
-    const [activeTab, setActiveTab] = React.useState("html");
+
     const data = [
         {
             label: "All Order",
@@ -37,6 +37,7 @@ export const OrderViewPage = () => {
 
         },
     ]
+    const [activeTab, setActiveTab] = React.useState("All Order");
     return (
         <Box className="2xl:px-20 md:px-6 px-4">
             <Tabs value={activeTab}>

@@ -33,8 +33,7 @@ export const AllOrder: React.FC = () => {
     const columns: GridColDef[] = [
         { field: 'username', headerName: 'Username', width: 150 },
         { field: 'email', headerName: 'email', width: 200 },
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'name', headerName: 'Title', width: 100 },
+        { field: 'name', headerName: 'Title', width: 250 },
         { field: 'price', headerName: 'Price', width: 100 },
         { field: 'quantity', headerName: 'Quantity', width: 100 },
         { field: 'total', headerName: 'Total Price', width: 100 },

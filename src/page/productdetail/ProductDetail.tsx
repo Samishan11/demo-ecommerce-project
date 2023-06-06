@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom"
 import { Typography } from "@material-tailwind/react";
 import { useGetSingleProductQuery } from "../../redux/api/apiSlice";
@@ -32,12 +32,19 @@ export const ProductDetail: React.FC = () => {
         dispatch(updateCart(cData));
     };
 
+    useEffect(() => {
+        window.scroll({ top: 0, })
+    }, [window])
+
     return (
         <Box className="flex flex-col sm:flex-row items-center sm:items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             {!isLoading ? <Box className=" w-full sm:w-2/4 ">
                 <img className=" w-[80%] object-contain" alt={product?.title} src={product?.image} />
             </Box>
-                : <LoadingSkeleton className="w-[90%] mx-auto" height={"500px"} number={1} />
+                :
+                <Box className="w-full md:w-2/4">
+                    <LoadingSkeleton className="w-[90%] mx-auto grid" height={"500px"} number={1} />
+                </Box>
             }
             {
                 !isLoading ?
@@ -82,7 +89,7 @@ export const ProductDetail: React.FC = () => {
                         </Box>
                     </Box>
                     :
-                    <LoadingSkeleton className="w-[90%] mx-auto" height={"100px"} number={5} />
+                    <Box className="w-full md:w-2/4">   <LoadingSkeleton className="w-[90%]" height={"100px"} number={5} /> </Box>
             }
         </Box>
     );
