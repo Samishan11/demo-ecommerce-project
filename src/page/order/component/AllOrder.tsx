@@ -7,6 +7,7 @@ import { EmptyOrder } from "./EmptyOrder";
 export const AllOrder: React.FC = () => {
   const { order } = useSelector((state: any) => state.order);
   const [row, setRow] = useState<any>();
+  console.log(order);
   useEffect(() => {
     if (order) {
       const orderdata = order?.flatMap((data: any) => {
@@ -15,7 +16,7 @@ export const AllOrder: React.FC = () => {
             username: data.username,
             email: data.email,
             orderAt: data.orderAt,
-            id: item.pid,
+            id: item.id,
             orderID: data.id,
             name: item.title,
             price: item.price,
@@ -31,7 +32,7 @@ export const AllOrder: React.FC = () => {
   }, [order]);
 
   const columns: GridColDef[] = [
-    { field: "orderID", headerName: "OrderID", width: 150 },
+    { field: "orderID", headerName: "Order ID", width: 150 },
     { field: "username", headerName: "Username", width: 150 },
     { field: "email", headerName: "email", width: 250 },
     { field: "name", headerName: "Title", width: 300 },
