@@ -15,8 +15,8 @@ export const AllOrder: React.FC = () => {
             username: data.username,
             email: data.email,
             orderAt: data.orderAt,
-            id: data.id,
-            pid: item.pid,
+            id: item.pid,
+            orderID: data.id,
             name: item.title,
             price: item.price,
             quantity: `x ${item.quantity}`,
@@ -31,7 +31,7 @@ export const AllOrder: React.FC = () => {
   }, [order]);
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "Order ID", width: 150 },
+    { field: "orderID", headerName: "OrderID", width: 150 },
     { field: "username", headerName: "Username", width: 150 },
     { field: "email", headerName: "email", width: 250 },
     { field: "name", headerName: "Title", width: 300 },
