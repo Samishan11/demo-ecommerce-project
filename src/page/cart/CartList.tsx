@@ -9,6 +9,7 @@ import {
 } from "../../redux/slice/cartSlice";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface CartItem {
   id: string;
@@ -39,6 +40,10 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
     const updatedQuantities = [...quantity];
     if (action === "increase") {
       updatedQuantities[ind] += 1;
+      if (updatedQuantities[ind] > 5)
+        return toast.warn("Item Limit Reach.", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
       const body = {
         ...data,
         id: data.id,
@@ -72,7 +77,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
   return (
     <Box className="mt-8">
       <Box className="flow-root">
-        <ul className="overflow-y-scroll">
+        <ul className="overflow-y-scroll max-h-[65vh]">
           {cartItems?.length > 0 ? (
             cartItems.map((c, ind: number) => (
               <li key={ind} className="flex py-6">
@@ -122,7 +127,7 @@ export const CartList: React.FC<CartPageProps> = ({ cartItems }) => {
             <Box>Cart is Empty</Box>
           )}
         </ul>
-        <Box className="border-t w-full left-0 absolute bottom-0 bg-gray-100 border-gray-200 px-4 py-6">
+        <Box className="border-t  max-h-[40vh] w-full left-0 absolute bottom-0 bg-gray-100 border-gray-200 px-4 py-6">
           <Box className="flex justify-between text-base font-medium text-gray-900">
             <p>Subtotal</p>
             <p>${totalPrice}</p>
